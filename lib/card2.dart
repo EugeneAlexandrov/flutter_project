@@ -57,7 +57,7 @@ class Card2 extends StatelessWidget {
   }
 }
 
-class AuthorCard extends StatelessWidget {
+class AuthorCard extends StatefulWidget {
   const AuthorCard(
       {Key? key,
       this.authorName = '',
@@ -70,6 +70,12 @@ class AuthorCard extends StatelessWidget {
   final ImageProvider imageProvider;
 
   @override
+  _AuthorCardState createState() => _AuthorCardState();
+}
+
+class _AuthorCardState extends State<AuthorCard> {
+  bool _isFavorite = false;
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16.0),
@@ -79,7 +85,7 @@ class AuthorCard extends StatelessWidget {
           Row(
             children: [
               CircleImage(
-                imageProvider: imageProvider,
+                imageProvider: widget.imageProvider,
                 imageRadius: 28,
               ),
               const SizedBox(width: 8),
@@ -87,11 +93,11 @@ class AuthorCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    authorName,
+                    widget.authorName,
                     style: FooderlichTheme.lightTextTheme.headline2,
                   ),
                   Text(
-                    title,
+                    widget.title,
                     style: FooderlichTheme.lightTextTheme.headline3,
                   ),
                 ],
@@ -99,10 +105,15 @@ class AuthorCard extends StatelessWidget {
             ],
           ),
           IconButton(
-              icon: Icon(Icons.favorite_border_outlined),
+              icon: Icon(_isFavorite
+                  ? Icons.favorite
+                  : Icons.favorite_border_outlined,color:Colors.red,),
               iconSize: 30,
               color: Colors.grey[400],
               onPressed: () {
+                setState(() {
+                  _isFavorite = !_isFavorite;
+                });
                 const snackBar = SnackBar(content: Text('Press Favorite'));
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               })
