@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:fooderlich/fooderlich_theme.dart';
+import 'package:fooderlich/models/models.dart';
 
 import 'circle_image.dart';
 
 class Card2 extends StatelessWidget {
-  const Card2({Key? key}) : super(key: key);
+  const Card2({Key? key, required this.recipe}) : super(key: key);
 
   final String smoothies = 'Smoothies';
-  final String recipe = 'Recipe';
+  final String recipe1 = 'Recipe';
+  final ExploreRecipe recipe;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class Card2 extends StatelessWidget {
                 bottom: 16,
                 right: 16,
                 child: Text(
-                  recipe,
+                  recipe1,
                   style: FooderlichTheme.lightTextTheme.headline1,
                 ),
               ),
