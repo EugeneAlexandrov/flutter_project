@@ -7,8 +7,6 @@ import 'circle_image.dart';
 class Card2 extends StatelessWidget {
   const Card2({Key? key, required this.recipe}) : super(key: key);
 
-  final String smoothies = 'Smoothies';
-  final String recipe1 = 'Recipe';
   final ExploreRecipe recipe;
 
   @override
@@ -17,7 +15,10 @@ class Card2 extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/mag5.png'), fit: BoxFit.cover),
+              image: AssetImage(
+                recipe.backgroundImage ?? 'assets/magazine_pics/mag1.png',
+              ),
+              fit: BoxFit.cover),
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
         constraints: const BoxConstraints.expand(
@@ -26,9 +27,10 @@ class Card2 extends StatelessWidget {
         ),
         child: Column(children: [
           AuthorCard(
-            authorName: 'Mike Katz',
-            title: 'Smoothie Connoisseur',
-            imageProvider: AssetImage('assets/author_katz.jpeg'),
+            authorName: recipe.authorName ?? 'N/A',
+            title: recipe.role ?? 'N/A',
+            imageProvider: AssetImage(recipe.profileImage ??
+                'assets/profile_pics/person_tiffani.jpeg'),
           ),
           Expanded(
             child: Stack(children: [
@@ -38,7 +40,7 @@ class Card2 extends StatelessWidget {
                 child: RotatedBox(
                   quarterTurns: 3,
                   child: Text(
-                    smoothies,
+                    recipe.title??'N/A',
                     style: FooderlichTheme.lightTextTheme.headline1,
                   ),
                 ),
@@ -47,7 +49,7 @@ class Card2 extends StatelessWidget {
                 bottom: 16,
                 right: 16,
                 child: Text(
-                  recipe1,
+                  recipe.subtitle??'N/A',
                   style: FooderlichTheme.lightTextTheme.headline1,
                 ),
               ),
@@ -64,7 +66,7 @@ class AuthorCard extends StatefulWidget {
       {Key? key,
       this.authorName = '',
       this.title = '',
-      this.imageProvider = const AssetImage('assets/mag4.png')})
+      this.imageProvider = const AssetImage('assets/profile_pics/person_cesare.jpeg')})
       : super(key: key);
 
   final String authorName;
@@ -107,9 +109,10 @@ class _AuthorCardState extends State<AuthorCard> {
             ],
           ),
           IconButton(
-              icon: Icon(_isFavorite
-                  ? Icons.favorite
-                  : Icons.favorite_border_outlined,color:Colors.red,),
+              icon: Icon(
+                _isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
+                color: Colors.red,
+              ),
               iconSize: 30,
               color: Colors.grey[400],
               onPressed: () {

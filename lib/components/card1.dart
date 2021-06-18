@@ -5,10 +5,6 @@ import 'package:fooderlich/models/models.dart';
 class Card1 extends StatelessWidget {
   const Card1({Key? key, required this.recipe}) : super(key: key);
 
-  final String category = 'Editor\'s Choice';
-  final String title = 'The Art of Dough';
-  final String description = 'Learn to make the perfect bread.';
-  final String chef = 'Ray Wenderlich';
   final ExploreRecipe recipe;
 
   @override
@@ -19,28 +15,40 @@ class Card1 extends StatelessWidget {
         constraints: const BoxConstraints.expand(width: 350, height: 450),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/mag1.png'),
+            image: AssetImage(recipe.backgroundImage??'assets/magazine_pics/mag1.png'),
             fit: BoxFit.fill,
           ),
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
         child: Stack(
           children: [
-            Text(category, style: FooderlichTheme.darkTextTheme.bodyText1),
+            Text(
+              recipe.subtitle??'N/A',
+              style: FooderlichTheme.darkTextTheme.bodyText1,
+            ),
             Positioned(
-                top: 20,
-                child: Text(title,
-                    style: FooderlichTheme.darkTextTheme.headline2)),
+              child: Text(
+                recipe.title??'N/A',
+                style: FooderlichTheme.darkTextTheme.headline2,
+              ),
+              top: 20,
+            ),
             Positioned(
-                bottom: 30,
-                right: 0,
-                child: Text(description,
-                    style: FooderlichTheme.darkTextTheme.bodyText1)),
+              child: Text(
+                recipe.message??'N/A',
+                style: FooderlichTheme.darkTextTheme.bodyText1,
+              ),
+              bottom: 30,
+              right: 0,
+            ),
             Positioned(
-                bottom: 10,
-                right: 0,
-                child:
-                    Text(chef, style: FooderlichTheme.darkTextTheme.bodyText1)),
+              child: Text(
+                recipe.authorName??'N/A',
+                style: FooderlichTheme.darkTextTheme.bodyText1,
+              ),
+              bottom: 10,
+              right: 0,
+            )
           ],
         ),
       ),

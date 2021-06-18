@@ -14,7 +14,8 @@ class Card3 extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/mag2.png'),
+              image: AssetImage(
+                  recipe.backgroundImage ?? 'assets/magazine_pics/mag1.png'),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.all(
@@ -44,7 +45,7 @@ class Card3 extends StatelessWidget {
                     height: 8,
                   ),
                   Text(
-                    'Recipe Trends',
+                    recipe.title ?? 'N/A',
                     style: FooderlichTheme.darkTextTheme.headline2,
                   ),
                   const SizedBox(height: 30),
