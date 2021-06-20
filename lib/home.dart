@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fooderlich/screens/explore_screen.dart';
-import 'components/card1.dart';
-import 'components/card2.dart';
+import 'package:fooderlich/screens/recipes_screen.dart';
 import 'components/card3.dart';
 import 'models/explore_recipe.dart';
 
@@ -17,16 +16,7 @@ class _HomeState extends State<Home> {
 
   static List pages = <Widget>[
     ExploreScreen(),
-    Card2(
-      recipe: ExploreRecipe(
-        authorName: 'Mike Katz',
-        role: 'Smoothie Connoisseur',
-        profileImage: 'assets/profile_pics/person_katz.jpeg',
-        title: 'Recipe',
-        subtitle: 'Smoothies',
-        backgroundImage: 'assets/magazine_pics/mag2.png',
-      ),
-    ),
+    RecipeScreen(),
     Card3(
       recipe: ExploreRecipe(
         title: 'Vegan Trends',
