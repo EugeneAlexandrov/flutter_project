@@ -3,7 +3,7 @@ import 'package:fooderlich/screens/explore_screen.dart';
 import 'package:fooderlich/screens/grocery_screen.dart';
 import 'package:fooderlich/screens/recipes_screen.dart';
 import 'package:provider/provider.dart';
-import 'models/models.dart';
+import '../models/models.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

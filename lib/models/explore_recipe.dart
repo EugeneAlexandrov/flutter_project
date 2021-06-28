@@ -8,6 +8,7 @@ class RecipeCardType {
 }
 
 class ExploreRecipe {
+  String? id;
   String? cardType;
   String? title;
   String? subtitle;
@@ -27,7 +28,8 @@ class ExploreRecipe {
   List<Instruction>? instructions;
 
   ExploreRecipe(
-      {this.cardType,
+      {this.id,
+      this.cardType,
       this.title,
       this.subtitle,
       this.backgroundImage,
@@ -46,6 +48,7 @@ class ExploreRecipe {
       this.instructions});
 
   ExploreRecipe.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     cardType = json['cardType'];
     title = json['title'];
     subtitle = json['subtitle'];
