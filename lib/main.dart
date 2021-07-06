@@ -15,6 +15,7 @@ class Fooderlich extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = FooderlichTheme.dark();
+    final _appStateManager = AppStateManager();
     return MaterialApp(
       theme: theme,
       title: 'Fooderlich',
@@ -22,6 +23,7 @@ class Fooderlich extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (context) => TabManager()),
           ChangeNotifierProvider(create: (context) => GroceryManager()),
+          ChangeNotifierProvider(create: (context) => _appStateManager),
         ],
         child: const Home(),
       ),
