@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fooderlich/models/fooderlich_pages.dart';
 import 'package:fooderlich/models/models.dart';
+import 'package:fooderlich/screens/screens.dart';
 
 //It extends RouterDelegate.
 //The system will tell the router to build and configure a navigator widget.
@@ -12,10 +14,13 @@ class AppRouter extends RouterDelegate
   // Declares GlobalKey, a unique key across the entire app.
   @override
   // TODO: implement navigatorKey
-  GlobalKey<NavigatorState>? navigatorKey;
+  final GlobalKey<NavigatorState>? navigatorKey;
 
-  AppRouter(this.appStateManager, this.groceryManager, this.profileManager)
-      : navigatorKey = GlobalKey<NavigatorState>() {
+  AppRouter({
+    required this.appStateManager,
+    required this.groceryManager,
+    required this.profileManager,
+  }) : navigatorKey = GlobalKey<NavigatorState>() {
     // TODO: Add listeners
     appStateManager.addListener(notifyListeners);
     groceryManager.addListener(notifyListeners);
@@ -42,6 +47,11 @@ class AppRouter extends RouterDelegate
       //Declares pages, the stack of pages that describes your navigation stack.
       pages: [
         // TODO: Add SplashScreen
+        MaterialPage(
+          name: FooderlichPages.splashPath,
+          key: ValueKey(FooderlichPages.splashPath),
+          child: const SplashScreen(),
+        ),
         // TODO: Add LoginScreen
         // TODO: Add OnboardingScreen
         // TODO: Add Home

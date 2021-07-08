@@ -2,20 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:fooderlich/models/grocery_manager.dart';
 import 'package:provider/provider.dart';
 import 'fooderlich_theme.dart';
-import 'screens/home.dart';
+import 'navigation/app_router.dart';
 import 'models/models.dart';
 
 void main() {
   runApp(const Fooderlich());
 }
 
-class Fooderlich extends StatelessWidget {
+class Fooderlich extends StatefulWidget {
   const Fooderlich({Key? key}) : super(key: key);
+
+  @override
+  _FooderlichState createState() => _FooderlichState();
+}
+
+class _FooderlichState extends State<Fooderlich> {
+  final AppStateManager _appStateManager = AppStateManager();
+  final GroceryManager _groceryManager = GroceryManager();
+  final ProfileManager _profileManager = ProfileManager();
+  late AppRouter _appRouter;
+
+  @override
+  void initState() {
+    _appRouter = AppRouter(
+      appStateManager: _appStateManager,
+      groceryManager: _groceryManager,
+      profileManager: _profileManager,
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = FooderlichTheme.dark();
-    final _appStateManager = AppStateManager();
     return MaterialApp(
       theme: theme,
       title: 'Fooderlich',
@@ -25,7 +44,8 @@ class Fooderlich extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => GroceryManager()),
           ChangeNotifierProvider(create: (context) => _appStateManager),
         ],
-        child: const Home(),
+        child: Router(routerDelegate: _appRouter),
+        //Add backButtonDispatcer
       ),
     );
   }
