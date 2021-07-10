@@ -32,8 +32,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<TabManager>(
-      builder: (context, tabManager, child) {
+    // TODO: Wrap Consumer for AppStateManager
+    return Consumer<AppStateManager>(
+      builder: (context, appStateManager, child) {
         return Scaffold(
           appBar: AppBar(
             title: Text(
@@ -43,7 +44,7 @@ class _HomeState extends State<Home> {
             actions: [profileButton()],
           ),
           body: IndexedStack(
-            index: tabManager.selectedTab,
+            index: widget.currentTab,
             children: pages,
           ),
           bottomNavigationBar: BottomNavigationBar(
@@ -57,15 +58,17 @@ class _HomeState extends State<Home> {
               const BottomNavigationBarItem(
                   icon: Icon(Icons.list), label: 'To Buy'),
             ],
-            currentIndex: tabManager.selectedTab,
+            currentIndex: widget.currentTab,
             onTap: (index) {
-              tabManager.goToTab(index);
+              Provider.of<AppStateManager>(context, listen: false)
+                  .goToTab(index);
             },
           ),
         );
       },
     );
   }
+
   Widget profileButton() {
     return Padding(
       padding: const EdgeInsets.only(right: 16.0),
