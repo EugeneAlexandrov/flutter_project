@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/models/fooderlich_pages.dart';
 import 'package:fooderlich/models/models.dart';
 import 'package:fooderlich/screens/screens.dart';
 
@@ -47,13 +46,13 @@ class AppRouter extends RouterDelegate
       //Declares pages, the stack of pages that describes your navigation stack.
       pages: [
         // TODO: Add SplashScreen
-        MaterialPage(
-          name: FooderlichPages.splashPath,
-          key: ValueKey(FooderlichPages.splashPath),
-          child: const SplashScreen(),
-        ),
+        if (!appStateManager.isInitialized) SplashScreen.page(),
         // TODO: Add LoginScreen
+        if (appStateManager.isInitialized && !appStateManager.isLoggedIn)
+          LoginScreen.page(),
         // TODO: Add OnboardingScreen
+        if (appStateManager.isLoggedIn && !appStateManager.isOnboardingComplete)
+          OnboardingScreen.page(),
         // TODO: Add Home
         // TODO: Create new item
         // TODO: Select GroceryItemScreen
@@ -69,6 +68,9 @@ class AppRouter extends RouterDelegate
       return false;
     }
     // TODO: Handle Onboarding and splash
+    if (route.settings.name == FooderlichPages.onboardingPath) {
+      appStateManager.logout();
+    }
     // TODO: Handle state when user closes grocery item screen
     // TODO: Handle state when user closes profile screen
     // TODO: Handle state when user closes WebView screen

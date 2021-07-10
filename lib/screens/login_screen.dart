@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fooderlich/models/models.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   // TODO: LoginScreen MaterialPage Helper
@@ -10,6 +12,14 @@ class LoginScreen extends StatelessWidget {
   final Color rwColor = const Color.fromRGBO(64, 143, 77, 1);
   final TextStyle focusedStyle = const TextStyle(color: Colors.green);
   final TextStyle unfocusedStyle = const TextStyle(color: Colors.grey);
+
+  static MaterialPage page() {
+    return MaterialPage(
+      name: FooderlichPages.loginPath,
+      key: ValueKey(FooderlichPages.loginPath),
+      child: const LoginScreen(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +66,8 @@ class LoginScreen extends StatelessWidget {
         ),
         onPressed: () async {
           // TODO: Login -> Navigate to home
+          Provider.of<AppStateManager>(context, listen: false)
+              .login('mockName', 'mockPassword');
         },
       ),
     );

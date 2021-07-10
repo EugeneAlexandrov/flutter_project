@@ -49,9 +49,9 @@ class AppStateManager extends ChangeNotifier {
 
   void logout() {
     _initialized = false;
-    _loggedIn = false;
     _onboardingComplete = false;
     _selectedTab = 0;
     initializeApp();
+    notifyListeners();
   }
 }

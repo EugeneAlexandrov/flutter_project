@@ -34,18 +34,19 @@ class _FooderlichState extends State<Fooderlich> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = FooderlichTheme.dark();
-    return MaterialApp(
-      theme: theme,
-      title: 'Fooderlich',
-      home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (context) => TabManager()),
-          ChangeNotifierProvider(create: (context) => GroceryManager()),
-          ChangeNotifierProvider(create: (context) => _appStateManager),
-        ],
-        child: Router(routerDelegate: _appRouter),
-        //Add backButtonDispatcer
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => _appStateManager),
+        ChangeNotifierProvider(create: (context) => _groceryManager),
+        ChangeNotifierProvider(create: (context) => _profileManager),
+      ],
+      child: MaterialApp(
+        theme: FooderlichTheme.dark(),
+        title: 'Fooderlich',
+        // TODO: Replace with Router widget
+        home: Router(
+          routerDelegate: _appRouter,
+        ),
       ),
     );
   }
