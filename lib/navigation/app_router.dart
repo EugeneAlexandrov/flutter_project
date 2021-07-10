@@ -85,6 +85,9 @@ class AppRouter extends RouterDelegate
       appStateManager.logout();
     }
     // TODO: Handle state when user closes grocery item screen
+    if (route.settings.name == FooderlichPages.groceryItemDetails) {
+      groceryManager.groceryItemTapped(null);
+    }
     // TODO: Handle state when user closes profile screen
     // TODO: Handle state when user closes WebView screen
     return true;
