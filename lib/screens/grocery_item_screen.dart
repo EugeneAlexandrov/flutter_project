@@ -9,16 +9,35 @@ import 'package:uuid/uuid.dart';
 class GroceryItemScreen extends StatefulWidget {
   GroceryItemScreen({
     Key? key,
+    this.index,
     this.onCreate,
     this.onUpdate,
     this.originalItem,
   })  : isUpdating = (originalItem != null),
         super(key: key);
 
+  final int? index;
   final Function(GroceryItem)? onCreate;
-  final Function(GroceryItem)? onUpdate;
+  final Function(GroceryItem, int)? onUpdate;
   final GroceryItem? originalItem;
   final bool isUpdating;
+
+  static MaterialPage page(
+      {GroceryItem? item,
+      int? index,
+      Function(GroceryItem)? onCreate,
+      Function(GroceryItem, int)? onUpdate}) {
+    return MaterialPage(
+      name: FooderlichPages.groceryItemDetails,
+      key: ValueKey(FooderlichPages.groceryItemDetails),
+      child: GroceryItemScreen(
+        originalItem: item,
+        index: index,
+        onCreate: onCreate,
+        onUpdate: onUpdate,
+      ),
+    );
+  }
 
   @override
   _GroceryItemScreenState createState() => _GroceryItemScreenState();
@@ -69,7 +88,6 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: () {
-              // TODO 24: Add callback handler
               final groceryItem = GroceryItem(
                 id: widget.originalItem?.id ?? const Uuid().v1(),
                 name: _nameController.text,
@@ -86,7 +104,7 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
               );
 
               if (widget.isUpdating) {
-                widget.onUpdate!(groceryItem);
+                widget.onUpdate!(groceryItem, widget.index!);
               } else {
                 widget.onCreate!(groceryItem);
               }
