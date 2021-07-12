@@ -41,6 +41,7 @@ class GroceryManager extends ChangeNotifier {
 
   void updateItem(GroceryItem item, int index) {
     _groceryItems[index] = item;
+    _selectedIndex = null;
     _createNewItem = false;
     notifyListeners();
   }
